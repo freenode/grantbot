@@ -1,0 +1,20 @@
+nickname: grantbot
+#username: grantbot
+#realname: grantbot
+password: grantbot:hunter2
+
+sasl:
+  username: grantbot
+  password: hunter3
+
+oper:
+  name: grantbot
+  file: ~/.freenode/freenode.key
+  pass: hunter4
+
+server: chat.freenode.net:+9003
+
+privsets:
+  - peon
+  - manager
+  - god
