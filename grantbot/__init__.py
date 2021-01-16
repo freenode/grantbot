@@ -90,14 +90,14 @@ class Server(BaseServer):
             if command == "grantme":
                 opername = await self._oper_name(nickname)
                 if opername is not None:
-                    if args and args[0] in self._config.privsets:
+                    if not args:
+                        await self.send(build("NOTICE", [nickname, "give me an argument then"]))
+                    elif not args[0] in self._config.privsets:
+                        await self.send(build("NOTICE", [nickname, f"dunno what '{args[0]}' means"]))
+                    else:
                         privset = args[0]
                         await self.send(build("GRANT",  [nickname, privset]))
                         await self.send(build("NOTICE", [nickname, f"good luck with {privset} mate"]))
-                    elif not args:
-                        await self.send(build("NOTICE", [nickname, "give me an argument then"]))
-                    else:
-                        await self.send(build("NOTICE", [nickname, f"dunno what '{args[0]}' means"]))
                 else:
                     await self.send(build("NOTICE", [nickname, "who are you though"]))
 
