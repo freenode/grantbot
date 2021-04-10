@@ -29,7 +29,8 @@ class Server(BaseServer):
         self._config = config
 
     async def _oper_name(self, nickname: str):
-        await self.send(build("WHOIS", [nickname]))
+        # [nickname]*2 for remote whois
+        await self.send(build("WHOIS", [nickname]*2))
 
         whois_oper = Response(RPL_WHOISSPECIAL, [SELF, Folded(nickname)])
         whois_end  = Response(RPL_ENDOFWHOIS,   [SELF, Folded(nickname)])
